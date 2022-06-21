@@ -1,7 +1,11 @@
 import { books, authors } from "../libs/data.js";
+import { pool } from "../db/index.js";
 
-export function getBooks() {
-  return books;
+export async function getBooks() {
+  const queryResult = await pool.query("SELECT * FROM books");
+  console.log(`row count: ${queryResult.rowCount}`);
+  console.log(JSON.stringify(queryResult.rows));
+  return queryResult.rows;
 }
 
 export function searchBooksByTitle(searchTerm) {

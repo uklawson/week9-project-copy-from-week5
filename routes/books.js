@@ -13,7 +13,7 @@ import {
 
 /* books endpoints go here */
 
-router.get("/", function (req, res) {
+router.get("/", async function (req, res) {
   if (req.query.search !== undefined) {
     const result = searchBooksByTitle(req.query.search);
     return res.json({ success: true, payload: result });
@@ -24,7 +24,7 @@ router.get("/", function (req, res) {
     return res.json({ success: true, payload: result });
   }
 
-  const result = getBooks();
+  const result = await getBooks();
   res.json({ success: true, payload: result });
 });
 
